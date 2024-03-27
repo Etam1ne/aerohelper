@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String    @id @default(uuid())
+  login    String    @unique @db.VarChar(63)
+  password String
+  role     Role      @default(parent)
+  employee Employee?
+  parent   Parent?
+}
+
+model Parent {
+  firstName  String?    @db.VarChar(63)
+  middleName String?    @db.VarChar(63)
+  lastName   String?    @db.VarChar(63)
+  phone      String?    @db.VarChar(63)
+  email      String?    @db.VarChar(63)
+  userId     String     @unique
+  documents  Document[]
+  user       User       @relation(fields: [userId], references: [id])
+}
+
+model Employee {
+  userId   String     @unique
+  document Document[]
+  user     User       @relation(fields: [userId], references: [id])
+}
+
+model Document {
+  id           String   @id @default(uuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now())
+  parentId     String
+  employeeId   String
+  employeeInfo Json
+  parentInfo   Json
+  employee     Employee @relation(fields: [employeeId], references: [userId], onDelete: NoAction)
+  parent       Parent   @relation(fields: [parentId], references: [userId], onDelete: NoAction)
+}
+
+enum Role {
+  employee
+  parent
+}
