@@ -1,6 +1,6 @@
 import { Role } from '@prisma/client';
 import { documentsController } from '../controllers';
-import { createDocumentSchema, documentsListSchema } from '../dtos';
+import { createDocumentSchema, documentByIdSchema, documentsListSchema, updateDocumentSchema } from '../dtos';
 import { protectedProcedure, router } from '../trpc';
 
 export const documentsRouter = router({
@@ -13,6 +13,22 @@ export const documentsRouter = router({
         return {
             data: documents,
             total: count,
+        }
+    }),
+
+    byId: protectedProcedure.input(documentByIdSchema).query(async ({ input }) => {
+        const document = await documentsController.getById(input);
+
+        return {
+            data: document,
+        }
+    }),
+
+    update: protectedProcedure.input(updateDocumentSchema).mutation(async ({ input }) => {
+        const document = await documentsController.update(input);
+
+        return {
+            data: document,
         }
     }),
 

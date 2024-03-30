@@ -1,7 +1,7 @@
 'use client'
 
 import { redirect } from 'next/navigation';
-import { InputText } from '../_components/form';
+import { InputButton, InputText } from '../_components/form';
 import { trpc } from '../_trpc/client';
 import { PagesEnum } from '../../enums';
 
@@ -28,7 +28,7 @@ const LoginPage = () => {
                 <h1 className='text-black '>Авторизация</h1>
                 <InputText name='login' type='text'/>
                 <InputText name='password' type='password'/>
-                <input type="submit" value='Войти' className='bg-main-blue text-main-white p-2 rounded hover:cursor-pointer hover:bg-main-darkblue'/>
+                <InputButton value='Войти' type='submit'/>
             </form>
         </main>
     )
