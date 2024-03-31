@@ -49,7 +49,7 @@ const DocumentsListPage = () => {
             }}
           />
         </div>
-        <p className='h-full'>Роль: {userRoleTranslation[me.data?.role]}</p>
+        <p className='h-full'>Роль: {userRoleTranslation[me.data?.role as Role]}</p>
       </div>
       <div className='flex flex-col gap-4 p-12'>
         <div className='w-full hidden gap-4 rounded-2xl border border-main-blue p-4 align-middle lg:flex'>
