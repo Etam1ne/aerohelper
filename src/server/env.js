@@ -1,4 +1,3 @@
-
 const { z } = require('zod');
 
 const envSchema = z.object({
@@ -8,14 +7,14 @@ const envSchema = z.object({
 });
 
 class EnvSchema {
-    data = {
-        DATABASE_URL,
-        JWT_SECRET,
-        NODE_ENV,
-    };
+  data = {
+    DATABASE_URL,
+    JWT_SECRET,
+    NODE_ENV,
+  };
 }
 
-/** 
+/**
  * @type {EnvSchema}
  */
 const env = envSchema.safeParse(process.env);

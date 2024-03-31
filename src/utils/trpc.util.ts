@@ -22,10 +22,7 @@ export const trpc = createTRPCNext<AppRouter>({
               return {};
             }
 
-            const {
-              connection: _connection,
-              ...headers
-            } = ctx.req.headers;
+            const { connection: _connection, ...headers } = ctx.req.headers;
             return headers;
           },
           transformer,

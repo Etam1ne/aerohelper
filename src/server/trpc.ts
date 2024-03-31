@@ -22,7 +22,7 @@ const isAuth = t.middleware(async (opts) => {
   }
 
   return opts.next();
-})
+});
 
 export const protectedProcedure = t.procedure.use(isAuth);
 

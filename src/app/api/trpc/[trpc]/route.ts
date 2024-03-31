@@ -9,7 +9,7 @@ const handler = (req: Request) => {
     router: appRouter,
     // @ts-ignore
     createContext,
-  })
-}
+  });
+};
 
-export { handler as POST, handler as GET }
+export { handler as POST, handler as GET };
