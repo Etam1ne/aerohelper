@@ -3,11 +3,11 @@ import { findParentSchema } from '../dtos';
 import { parentController } from '../controllers';
 
 export const parentsRouter = router({
-    find: protectedProcedure.input(findParentSchema).query(async ({ input }) => {
-        const parents = await parentController.findByQuery(input);
+  find: protectedProcedure.input(findParentSchema).query(async ({ input }) => {
+    const parents = await parentController.findByQuery(input);
 
-        return {
-            data: parents,
-        }
-    })
-})
+    return {
+      data: parents,
+    };
+  }),
+});
