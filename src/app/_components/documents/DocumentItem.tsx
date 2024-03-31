@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { DocumentWithUsers } from '../../../types';
-import { PagesEnum } from '../../../enums';
+import { DocumentPointEnum, PagesEnum } from '../../../enums';
 import { documentPointSort, documentPointTranslation } from '../../../constants';
 
 export const ItemInfo = ({
@@ -12,12 +12,11 @@ export const ItemInfo = ({
 export const DocumentItem = (document: DocumentWithUsers) => {
 
   const lastStatus = 
-    documentPointTranslation[
-      Object.keys(document.employeeInfo)
-      .sort((a, b) => documentPointSort.indexOf(a) - documentPointSort.indexOf(b))
-      .findLast((v) => {
-      return document.employeeInfo[v]?.date
-    })] || '';
+  documentPointTranslation[
+    Object.keys(document.employeeInfo || {})
+    .sort((a, b) => documentPointSort.indexOf(a) - documentPointSort.indexOf(b))
+    // @ts-ignore
+      .findLast((v) => document.employeeInfo?.[v]?.date) as DocumentPointEnum] || '';
 
   return (
     <Link
