@@ -51,7 +51,7 @@ export const documentsRouter = router({
         employeeId: ctx.user?.id as string,
       });
       return {
-        data: document,
+        data: document.id,
       };
     }),
 });

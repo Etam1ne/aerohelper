@@ -1,8 +1,8 @@
 'use client';
 
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { trpc } from '../../../_trpc/client';
-import { DocumentPointEnum } from '../../../../enums';
+import { DocumentPointEnum, PagesEnum } from '../../../../enums';
 import { DocumentPoint } from '../../../_components/documents';
 import { DocumentPersonInfoType } from '../../../../types';
 import { InputButton } from '../../../_components/form';
@@ -11,7 +11,11 @@ const DocumentPage = () => {
   const id = useParams<{ id: string }>().id;
 
   const query = trpc.document.byId.useQuery({ id });
-  const mutation = trpc.document.update.useMutation();
+  const mutation = trpc.document.update.useMutation({
+    onSuccess: () => {
+        query.refetch();
+    },
+  });
 
   const document = query.data?.data;
 
