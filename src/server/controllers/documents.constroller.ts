@@ -8,6 +8,7 @@ import {
 import { prisma } from '../prisma';
 import { TRPCError } from '@trpc/server';
 import { DocumentType } from '../../types/document.type';
+import { DocumentWithUsers } from '../../types';
 
 export class DocumentsController {
   public async getList(payload: DocumentsListDto) {

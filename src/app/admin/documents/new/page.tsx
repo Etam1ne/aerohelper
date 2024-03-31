@@ -12,20 +12,21 @@ const NewDocument = () => {
   const [parentId, setParentId] = useState<string>('');
   const [parentPhone, setParentPhone] = useState<string>('');
 
-  const mutation = trpc.document.create.useMutation();
+  const mutation = trpc.document.create.useMutation({
+    onSuccess: (data) => {
+      console.log()
+      router.push(`${PagesEnum.DOCUMENTS}/${data.data || ''}`);
+    }
+  });
 
-  const handleFormSubmit = async (formData: FormData) => {
+  const handleFormSubmit = (formData: FormData) => {
     const payload: CreateDocumentBodyDto = {
       parentId: formData.get('parentId') as string,
       parentInfo: {},
       employeeInfo: {},
     };
 
-    await mutation.mutateAsync(payload);
-
-    if (mutation.data?.data?.id) {
-      router.push(`${PagesEnum.DOCUMENTS}/${mutation.data.data?.id || ''}`);
-    }
+    mutation.mutate(payload);
   };
 
   const findParents = useCallback(() => {
@@ -53,7 +54,7 @@ const NewDocument = () => {
             key={index}
             onClick={() => setParentId(p.userId)}
           >
-            {p.firstName}
+            {`${p.firstName} (${p.phone})`}
           </p>
         ))}
       </div>
