@@ -7,6 +7,7 @@ import { PagesEnum } from '../../../enums';
 import { DocumentItem, ItemInfo } from '../../_components/documents';
 import { Role } from '@prisma/client';
 import { InputButton } from '../../_components/form';
+import { userRoleTranslation } from '../../../constants';
 
 const DocumentsListPage = () => {
   const router = useRouter();
@@ -28,29 +29,30 @@ const DocumentsListPage = () => {
 
   return (
     <main className='flex flex-col p-4'>
-      <div className='flex w-full gap-6'>
+      <div className='flex w-full gap-6 items-center'>
         {me.data?.role === Role.employee && (
           <div className=''>
             <InputButton
               type='button'
-              value='Создать новый документ'
+              value='Создать'
               onClick={() => router.push(`${PagesEnum.DOCUMENTS}/new`)}
             />
           </div>
-      )}
+        )}
         <div className=''>
-              <InputButton
-                type='button'
-                value='Выйти из аккаунта'
-                onClick={() => {
-                  localStorage.removeItem('token');
-                  router.push(PagesEnum.LOGIN)
-                }}
-              />
-            </div>
+          <InputButton
+            type='button'
+            value='Выйти'
+            onClick={() => {
+              localStorage.removeItem('token');
+             router.push(PagesEnum.LOGIN)
+            }}
+          />
         </div>
+        <p className='h-full'>Роль: {userRoleTranslation[me.data?.role as Role]}</p>
+      </div>
       <div className='flex flex-col gap-4 p-12'>
-        <div className='flex w-full flex-row gap-4 rounded-2xl border border-main-blue p-4 align-middle'>
+        <div className='w-full hidden gap-4 rounded-2xl border border-main-blue p-4 align-middle lg:flex'>
           <ItemInfo>Идентификатор</ItemInfo>
           <ItemInfo>Почта</ItemInfo>
           <ItemInfo>Телефон</ItemInfo>

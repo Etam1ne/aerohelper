@@ -6,7 +6,7 @@ import { documentPointSort, documentPointTranslation } from '../../../constants'
 export const ItemInfo = ({
   children,
 }: Readonly<{ children: React.ReactNode }>) => {
-  return <p className='h-full w-1/5 text-center align-middle'>{children}</p>;
+  return <p className='h-full lg:w-1/5 text-center align-middle'>{children}</p>;
 };
 
 export const DocumentItem = (document: DocumentWithUsers) => {
@@ -20,7 +20,7 @@ export const DocumentItem = (document: DocumentWithUsers) => {
 
   return (
     <Link
-      className='flex w-full cursor-pointer flex-row gap-4 rounded-2xl border border-main-blue p-4 align-middle'
+      className='flex w-full cursor-pointer flex-col gap-4 rounded-2xl border border-main-blue p-4 align-middle lg:flex-row'
       href={`${PagesEnum.DOCUMENTS}/${document.id}`}
       key={document.id}
     >

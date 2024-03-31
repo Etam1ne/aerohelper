@@ -1,12 +1,19 @@
 'use client';
 
-import { redirect } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import { InputButton, InputText } from '../_components/form';
 import { trpc } from '../_trpc/client';
 import { PagesEnum } from '../../enums';
 
 const LoginPage = () => {
-  const mutation = trpc.user.login.useMutation();
+  const router = useRouter();
+
+  const mutation = trpc.user.login.useMutation({
+    onSuccess: (data) => {
+      localStorage.setItem('token', String(data));
+      router.push(PagesEnum.DOCUMENTS);
+    }
+  });
 
   const handleLogin = (formData: FormData) => {
     const login = formData.get('login') as string;
@@ -16,10 +23,6 @@ const LoginPage = () => {
       login,
       password,
     });
-    if (mutation.data) {
-      localStorage.setItem('token', String(mutation.data));
-      redirect(PagesEnum.DOCUMENTS);
-    }
   };
 
   return (
