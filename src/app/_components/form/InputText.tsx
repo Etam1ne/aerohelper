@@ -5,12 +5,16 @@ export interface IInputTextProps {
   type: 'text' | 'email' | 'password';
   value?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
+  readonly?: boolean;
+  placeholer?: string;
 }
 
 export const InputText = (props: IInputTextProps) => {
   return (
     <input
+      placeholder={props.placeholer}
       onChange={props.onChange}
+      readOnly={props.readonly}
       type={props.type}
       name={props.name}
       value={props.value}

@@ -1,7 +1,7 @@
 import { Document } from '@prisma/client';
-import { DocumentPersonInfoType } from '.';
+import { DocumentPersonInfoType, ParentInfoType } from '.';
 
-export type DocumentType = Document & {
+export type DocumentType = Omit<Document, 'employeeInfo' | 'parentInfo'> & {
   employeeInfo: DocumentPersonInfoType;
-  parentInfo: DocumentPersonInfoType;
+  parentInfo: ParentInfoType;
 };

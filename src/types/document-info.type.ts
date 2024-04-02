@@ -4,3 +4,8 @@ export type DocumentInfoType = {
 };
 
 export type DocumentPersonInfoType = Record<string, DocumentInfoType>;
+
+export type ParentInfoType = {
+  childName: string;
+  flightDate: string;
+};

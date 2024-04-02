@@ -2,7 +2,10 @@ import { z } from 'zod';
 
 export const createDocumentSchema = z.object({
   parentId: z.string(),
-  parentInfo: z.object({}),
+  parentInfo: z.object({
+    flightDate: z.string().optional(),
+    childName: z.string().optional(),
+  }),
   employeeInfo: z.object({}),
 });
 
