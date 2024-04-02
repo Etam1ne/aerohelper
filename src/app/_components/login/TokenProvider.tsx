@@ -10,7 +10,7 @@ export const TokenProvider = ({ children }: { children: React.ReactNode }) => {
 
   const checkToken = () => {
     const token = localStorage.getItem('token');
-    if (!token && pathName !== PagesEnum.LOGIN) {
+    if (!token && pathName !== PagesEnum.LOGIN && !pathName.includes(PagesEnum.USERS)) {
       router.push(PagesEnum.LOGIN);
     }
   };
