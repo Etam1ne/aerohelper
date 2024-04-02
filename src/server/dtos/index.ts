@@ -5,3 +5,5 @@ export * from './create-document.dto';
 export * from './document-by-id.dto';
 export * from './update-document.dto';
 export * from './find-parent.dto';
+export * from './create-employee.dto';
+export * from './create-parent.dto';

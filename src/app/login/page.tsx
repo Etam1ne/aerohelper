@@ -4,6 +4,7 @@ import { redirect, useRouter } from 'next/navigation';
 import { InputButton, InputText } from '../_components/form';
 import { trpc } from '../_trpc/client';
 import { PagesEnum } from '../../enums';
+import { Role } from '@prisma/client';
 
 const LoginPage = () => {
   const router = useRouter();
@@ -31,10 +32,15 @@ const LoginPage = () => {
         action={handleLogin}
         className='flex flex-col gap-4 rounded-2xl bg-main-white px-6 py-8 shadow-md'
       >
-        <h1 className='text-black '>Авторизация</h1>
+        <h1 className='text-black w-full text-center'>Авторизация</h1>
         <InputText name='login' type='text' />
         <InputText name='password' type='password' />
         <InputButton value='Войти' type='submit' />
+        <p className='w-full text-center -my-2'>Регистрация:</p>
+        <div className='flex w-full justify-between'>
+          <InputButton value='Сотрудник' type='button' onClick={() => router.push(`${PagesEnum.USERS}/${Role.employee}`)}/>
+          <InputButton value='Родитель' type='button' onClick={() => router.push(`${PagesEnum.USERS}/${Role.parent}`)}/>
+        </div>
       </form>
     </main>
   );

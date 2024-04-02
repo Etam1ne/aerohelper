@@ -1,8 +1,8 @@
 'use client';
 
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { trpc } from '../../../_trpc/client';
-import { DocumentPointEnum, PagesEnum } from '../../../../enums';
+import { DocumentPointEnum } from '../../../../enums';
 import { DocumentPoint } from '../../../_components/documents';
 import { DocumentPersonInfoType } from '../../../../types';
 import { InputButton } from '../../../_components/form';
@@ -11,6 +11,7 @@ const DocumentPage = () => {
   const id = useParams<{ id: string }>().id;
 
   const query = trpc.document.byId.useQuery({ id });
+  const me = trpc.user.me.useQuery();
   const mutation = trpc.document.update.useMutation({
     onSuccess: () => {
         query.refetch();
@@ -44,6 +45,9 @@ const DocumentPage = () => {
     <main className='flex h-screen w-screen items-center justify-center'>
       {query.isSuccess && (
         <form action={handleForm} className='flex flex-col gap-2 p-2'>
+          <p>{document?.parentInfo?.childName && 'Ребенок: ' + document.parentInfo.childName}</p>
+          <p>{document?.parentInfo?.flightDate && 'Время полета: ' + document.parentInfo.flightDate}</p>
+          <p className='text-xs underline w-full text-right cursor-pointer text-main-blue'>Показать пакет документов</p>
           {Object.values(DocumentPointEnum).map((point, index) => {
             const documentPoint = document?.employeeInfo[point];
             return (
@@ -52,6 +56,7 @@ const DocumentPage = () => {
                 point={point}
                 date={documentPoint?.date}
                 key={index}
+                role={me.data?.role}
               />
             );
           })}

@@ -1,5 +1,5 @@
 import { protectedProcedure, publicProcedure, router } from '../trpc';
-import { loginSchema } from '../dtos';
+import { createEmployeeSchema, createParentSchema, loginSchema } from '../dtos';
 import { userController } from '../controllers';
 
 export const userRouter = router({
@@ -9,5 +9,13 @@ export const userRouter = router({
 
   me: protectedProcedure.query(({ ctx }) => {
     return userController.me({ id: ctx.user?.id as string });
+  }),
+
+  createEmployee: publicProcedure.input(createEmployeeSchema).mutation(async ({ input }) => {
+    return userController.createEmployee(input)
+  }),
+
+  createParent: publicProcedure.input(createParentSchema).mutation(async ({ input }) => {
+    return userController.createParent(input)
   }),
 });
