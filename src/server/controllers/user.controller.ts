@@ -58,6 +58,7 @@ export class UserController {
         firstName: paylaod.firstName,
         lastName: paylaod.lastName,
         middleName: paylaod.middleName,
+        phone: paylaod.phone,
         email: paylaod.email,
         userId: user.id,
       }
