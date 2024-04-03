@@ -14,7 +14,7 @@ export const DocumentPoint = (props: DocumentPointProps) => {
   const [checked, setChecked] = useState<boolean>(props.checked ?? false);
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!props.checked && documentPointEditor[props.point] === props.role ) {
+    if (!props.checked && (documentPointEditor[props.point] === props.role || props.role === Role.employee)) {
       setChecked(event.target.checked);
     }
   };

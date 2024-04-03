@@ -42,11 +42,16 @@ const DocumentPage = () => {
   };
 
   return (
-    <main className='flex h-screen w-screen items-center justify-center'>
+    <main className='flex h-screen w-screen justify-center'>
       {query.isSuccess && (
         <form action={handleForm} className='flex flex-col gap-2 p-2'>
-          <p>{document?.parentInfo?.childName && 'Ребенок: ' + document.parentInfo.childName}</p>
-          <p>{document?.parentInfo?.flightDate && 'Время полета: ' + document.parentInfo.flightDate}</p>
+          <p>{'Ребенок: ' + (document?.parentInfo?.childName ?? ' -- ')}</p>
+          <p>Провожающий: имя </p>
+          <p>Встречающий: имя </p>
+          <p>Рейс: —</p>
+          <p>Маршрут: — </p>
+          <p>{'Время вылета: ' + (document?.parentInfo?.flightDate ?? ' -- ')}</p>
+
           <p className='text-xs underline w-full text-right cursor-pointer text-main-blue'>Показать пакет документов</p>
           {Object.values(DocumentPointEnum).map((point, index) => {
             const documentPoint = document?.employeeInfo[point];
