@@ -12,11 +12,11 @@ export const documentPointTranslation: Record<DocumentPointEnum, string> = {
 };
 
 export const documentPointEditor: Record<DocumentPointEnum, Role> = {
-  [DocumentPointEnum.PASSED_TO_EMPLOYEE]: Role.employee,
-  [DocumentPointEnum.REGISTRATION_POINT]: Role.parent,
-  [DocumentPointEnum.LOOKUP_POINT]: Role.parent,
+  [DocumentPointEnum.PASSED_TO_EMPLOYEE]: Role.parent,
+  [DocumentPointEnum.REGISTRATION_POINT]: Role.employee,
+  [DocumentPointEnum.LOOKUP_POINT]: Role.employee,
   [DocumentPointEnum.PLANE_ENTRANCE]: Role.employee,
   [DocumentPointEnum.PLANE_EXIT]: Role.employee,
   [DocumentPointEnum.PASSED_TO_PARENT]: Role.employee,
-  [DocumentPointEnum.GET_FROM_EMPLOYEE]: Role.employee,
+  [DocumentPointEnum.GET_FROM_EMPLOYEE]: Role.parent,
 }
