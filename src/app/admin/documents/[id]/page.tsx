@@ -48,11 +48,13 @@ const DocumentPage = () => {
           <p>{'Ребенок: ' + (document?.parentInfo?.childName ?? ' -- ')}</p>
           <p>Провожающий: имя </p>
           <p>Встречающий: имя </p>
+          <p>Сопровождающий: имя </p>
           <p>Рейс: —</p>
           <p>Маршрут: — </p>
+          <p>Статус рейса: — </p>
           <p>{'Время вылета: ' + (document?.parentInfo?.flightDate ?? ' -- ')}</p>
 
-          <p className='text-xs underline w-full text-right cursor-pointer text-main-blue'>Показать пакет документов</p>
+          <p className='text-xs underline w-full text-right cursor-pointer text-main-blue'>Показать пакет документов<br/>Комментарии</p>
           {Object.values(DocumentPointEnum).map((point, index) => {
             const documentPoint = document?.employeeInfo[point];
             return (
